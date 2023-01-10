@@ -29,27 +29,27 @@ public class Main {
     }
     private static void insertNewFlower(Statement statement, String name, String color, int poisonous) throws SQLException {
         int numberOfAffectedRoows = statement.executeUpdate("INSERT INTO flower (name, color, poisonous) " +
-                "VALUES ('"+name+"', '"+color+"', '"+poisonous+"')");
+                "VALUES ('"+ name +"', '"+ color +"', '"+ poisonous +"')");
         System.out.println("number of affected rows:"+numberOfAffectedRoows);
     }
 
     private static void printAllFlowers(Statement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery(
-                "SELECT * FROM flower;");
+                "SELECT name, id FROM flower;");
         while (resultSet.next()) {
             System.out.println(resultSet.getString("name"));
-            System.out.println(resultSet.getInt(1));
+            System.out.println(resultSet.getInt("id"));
         }
     }
     private static void updateDescriptionFlower(Statement statement, int id, String description) throws SQLException {
         int numberOfUpdateRows = statement.executeUpdate("UPDATE flower " +
-                "SET description = '"+description+"'" +
+                "SET description = '"+ description +"'" +
                 "WHERE id ="+id);
-        System.out.println("number of update rows: "+numberOfUpdateRows+" --- id = "+id+" --- new description = "+description);
+        System.out.println("number of update rows: "+ numberOfUpdateRows +" --- id = "+ id +" --- new description = "+ description);
     }
 
     private static void deleteOfPoisonousFlowers(Statement statement) throws SQLException {
-        int numberOfDeleteRows = statement.executeUpdate("DELETE FROM flower WHERE poisonous = '1'");
+        int numberOfDeleteRows = statement.executeUpdate("DELETE FROM flower WHERE poisonous = 1");
         System.out.println("number of delete rows: "+numberOfDeleteRows);
     }
 }
